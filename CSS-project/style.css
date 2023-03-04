@@ -1,0 +1,185 @@
+body{
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+.header{
+    width: 100%;
+    height: 350px;
+    /* من اجل حل مشكلة حجم الصورة */
+    overflow: hidden;
+    /* تم التغيير هيك لحتى ما يروح الظل تبع الصورة للبدي */
+    position: relative;
+    /* من اجل اضافة خط فاصل بين الصورة واللوغو */
+    border-bottom: 10px solid rgb(121, 121, 144);
+    
+}
+/*  من اجل الحفاظ ع بعد الصورة ضمن الهيدر بحيث يحتويها كلها وما بيصير يتعرف الطول والعرض سوا*/
+#header-image{
+    width: 100%;
+    /* لرفع الصورة اعتمادا ع الموضع الاولي لها */
+    position: relative;
+    bottom: 10px;
+}
+#cover{
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    /* لازم نعملو ننستاتك لحتى يتفاعل مع الصورة */
+    position: absolute;
+    /* لحتى يكون فرق البعد بيناتون(مع الهيدير) غير موجود */
+    bottom: 0;
+    opacity: 0.5;
+}
+#menu-header{
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    top: 0;
+}
+#menu{
+    /* لحتى تبعد عن الجوانب */
+    margin-left: 5px;
+    margin-top: 20px;
+}
+/* منشان التعارض مع باقي البي تي ان لانو اسم عام */
+#menu > .btn{
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    /* من اجل لون خلفية الهوم الافتراضي */
+    padding: 5px;
+    border-radius: 10px;
+    /* من اجل سلاسة الانتقال */
+    transition: background 0.3s ;
+}
+
+#menu>.btn:hover {
+    background-color: rgba(137, 132, 132, 0.745);
+}
+.active{
+    background-color:rgb(67, 67, 220);
+}
+
+#main-content{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* من اجل تعديل موقع الدائرة اللوغو*/
+    top: -270px;
+}
+
+#frame-img{
+    height: 200px;
+    width: 200px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(121, 121, 144);
+    /* من اجل الدائرة */
+    border-radius: 50%;
+    /* من اجل توسيط الصورة */
+    margin: 0 auto;
+    box-shadow: 0px 9px 8px #c7c7c7;
+    transition: box-shadow 0.2s, padding 0.4s  ;
+
+
+}
+/* من اجل اضافة تاثير للصورة */
+#frame-img:hover{
+    box-shadow: 0px 9px 8px #959595;
+    padding: 15px;
+}
+
+
+#frame-img > img{
+    height: 75%;
+}
+
+
+#center-content{
+    text-align: center;
+    color: white;
+    font-size: 29px;
+}
+
+#main-body{
+    position: relative;
+    top: -200px;
+}
+
+#main-body>#main-header{
+    text-align: center;
+    font-size: 18px;
+    color: #6b6b6b;
+}
+
+#main-body > #main-header > h1 {
+    font-weight: 400;
+}
+
+#features,#courses{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 50px;
+}
+
+.feture,.course{
+    margin: 0px 50px;
+    background-color: rgb(211, 211, 211);
+    width: 300px;
+    text-align: center;
+    color: rgb(50, 48, 48);
+}
+
+.course{
+    background: transparent;
+    display: flex;
+    border: 1px solid #6b6b6b;
+    margin-left: 0px 30px;
+    border-radius: 10px;
+    width: 30%;
+    font-size: 13;
+    box-shadow: 0px 2px 8px rgb(219, 219, 219);
+}
+
+.course > img{
+    height: 100px;
+}
+
+.course  h2{
+    margin-left: 12px;
+    color: rgb(104, 104, 104);
+    font-weight: 500;
+}
+
+#courses-section{
+    margin-top: 150px;
+    background-color: rgb(235, 235, 235);
+    padding: 20px 0px;
+
+}
+
+#courses-section > h1{
+    margin-left: 30px;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+#footer{
+    background-color: rgb(77, 77, 77);
+    width: 100%;
+    color: white;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#footer > h5 {
+    font-weight: 400;
+}
+
