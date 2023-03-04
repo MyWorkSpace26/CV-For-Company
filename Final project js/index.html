@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Document</title>
+    <!-- External libraries -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caramel&display=swap" rel="stylesheet">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <!-- style="direction: rtl;" if i need red form ritgh to left -->
+    <div>
+        <!-- CENTER DIV -->
+        <div class="pag-body">
+
+            <!-- TASKS TABLE -->
+            <div class="Task-Table">
+
+                <!-- TABLE HEADER-->
+                <div class="Header">
+                    <h1 style="display: inline; font-family: 'Caramel', cursive;">My Tasks</h1>
+                    <button id="add-element" class="btn-circular" style="float: right;background-color: white;margin-right: 10px;"><span class="material-symbols-outlined">
+                            add
+                        </span>
+                    </button>
+                </div>
+                <!--// TABLE HEADER //-->
+
+
+                <!-- TASKS -->
+                <div id="tasks" style="padding: 20px;">
+
+                    <!-- Task -->
+                    <div class="task">
+                    
+                        <!-- Task Info -->
+                        <div style="width: 70%;">
+                            <h2 style="font-family: 'Caramel', cursive;">Read a book</h2>
+                            <div>
+                                <span class="material-symbols-outlined">
+                                    calendar_month
+                                </span>
+                                <span>10/10/2023</span>
+                            </div>
+                        </div>
+                        <!--// Task Info //-->
+                    
+                        <!-- Task Actions -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 20%;">
+                            <button class="btn-circular" style="background-color: brown; color: white;">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </button>
+                            <button class="btn-circular" style="background-color: rgb(29, 123, 29); color: white;">
+                                <span class="material-symbols-outlined">
+                                    check
+                                </span>
+                            </button>
+                            <button class="btn-circular" style="background-color:rgb(17, 17, 116) ; color: white;">
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </button>
+                        </div>
+                        <!--// Task Actions //-->
+                    
+                    </div>
+                    <!--// Task //-->
+
+                </div>
+                <!--// TASKS //-->
+            </div>
+            <!--// TASKS TABLE //-->
+        </div>
+        <!--// CENTER DIV //-->
+    </div>
+</body>
+
+
+<script>
+   let tasks = [
+        {
+            "title": "Read a book",
+            "date" : "15/1/2023",
+            "isDone" : true
+        },
+        {
+           "title": "Finish the final project",
+           "date": "6/3/2023",
+           "isDone": false
+       },
+       {
+           "title": "Work on a new project",
+           "date": "10/3/2023",
+           "isDone": false
+       }
+   ]
+
+   getTasksFromStorage()
+   function printArray (){
+        document.getElementById("tasks").innerHTML = ""
+        let index = 0
+        for (elem of tasks) {
+           let info = ` <!-- Task -->
+                    <div class="task ${elem.isDone ? 'done' : '' }">
+                    
+                        <!-- Task Info -->
+                        <div style="width: 70%;">
+                            <h2 style="font-family: 'Caramel', cursive;"> ${elem.title}</h2>
+                            <div>
+                                <span class="material-symbols-outlined">
+                                    calendar_month
+                                </span>
+                                <span>${elem.date}</span>
+                            </div>
+                        </div>
+                        <!--// Task Info //-->
+                    
+                        <!-- Task Actions -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 20%;">
+                            <button onclick = "deleteTask(${index})" class="btn-circular" style="background-color: brown; color: white;">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </button>
+                            ${elem.isDone ? `
+                                        <button onclick = "toggleTaskcompletion(${index})" class="btn-circular" style="background-color:rgb(118, 0, 101); color: white;">
+                                            <span class="material-symbols-outlined">
+                                                cancel
+                                            </span >
+                                        </button>
+                                ` : 
+                                `
+                                        <button onclick = "toggleTaskcompletion(${index})" class="btn-circular" style="background-color:rgb(29, 123, 29); color: white;">
+                                            <span class="material-symbols-outlined"> 
+                                                check 
+                                            </span > 
+                                        </button>
+                                `}
+                            
+
+                            <button onclick = "editTask(${index})" class="btn-circular" style="background-color:rgb(17, 17, 116) ; color: white;">
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </button>
+                        </div>
+                        <!--// Task Actions //-->
+                    
+                    </div>
+                    <!--// Task //-->`
+           document.getElementById("tasks").innerHTML += info
+           index++
+           
+        }
+    }
+   printArray()
+   document.getElementById("add-element").addEventListener("click",function(){
+   let title = prompt('Please enter the task address', '')
+   /* let date = prompt('Please enter the task date', '') */
+   let now = new Date() //class
+   //let date = now.getDate() +"/"+ now.getMonth() +"/"+ now.getFullYear() // we work with class Starting from the number zero
+   let date = now.getDate() +"/"+ (now.getMonth()+1) +"/"+ now.getFullYear()
+   let taskElement = { "title": "","date": "","isDone": false }
+   taskElement.title = title
+   taskElement.date = date
+   tasks.push(taskElement)
+   
+   //local storage
+
+   //write on the storage
+   /* localStorage.setItem("Tasks",tasks)//error because the local storage can not understand array or object so we need to change array or
+                                      //object to string  */
+    /* tasksString = JSON.stringify(tasks)
+    localStorage.setItem("Tasks",tasksString) */
+   localSet()
+   printArray()
+   })
+   function deleteTask(index) {
+        let x = confirm(`Are you sure from delete the task: ${tasks[index].title}`)
+        if(x){
+            tasks.splice(index, 1)
+            localSet()
+            printArray()
+        }
+   }
+   function editTask(index){
+    let titleEdit = prompt(`Enter the text of the modification to the task:`,`${tasks[index].title}`)
+    if(titleEdit){
+        tasks[index].title = titleEdit
+        localSet()
+        printArray()
+    }
+   }
+   function toggleTaskcompletion(index){
+        let task = tasks[index]
+        task.isDone = !task.isDone
+        localSet()
+        printArray()
+   }
+   
+   //==================== Storage Functions ========================//
+    function localSet() {
+        let tasksString = JSON.stringify(tasks)
+        localStorage.setItem("Tasks", tasksString)
+    }
+    function getTasksFromStorage(){
+        let retriveStorage = JSON.parse(localStorage.getItem("Tasks"))
+        /*1 if(retriveStorage == null){
+            
+        }else{
+            tasks = retriveStorage
+        } */
+
+        //2 tasks = retriveStorage == null ? [] : retriveStorage
+        //or
+        tasks = retriveStorage ?? []
+    }
+    
+   
+</script>
+</html>
